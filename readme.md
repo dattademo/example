@@ -1,12 +1,12 @@
 
 # Example Automation test
 
-Example Automation test is a maven project created by Dami·n Attademo to analyze google search behaviour on Windows.
+Example Automation test is a maven project created by Dami√°n Attademo to analyze google search behaviour on Windows.
 
 Developed with:
   - Maven
   - TestNG
-  - Log4jS
+  - Log4j
   - Selenium
   - Java
   
