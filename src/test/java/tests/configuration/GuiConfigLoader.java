@@ -29,13 +29,13 @@ public class GuiConfigLoader {
 	protected String browser;
 	protected String baseURL;
 	protected Properties testDataProperties;
-	
+
 	protected WebDriver driver;
 	protected Logger logger = LoggerFactory.getLogger(GuiConfigLoader.class.getName());
 	protected int timeout;
 	private ChromeOptions options;
 
-	@Parameters({"browser"})
+	@Parameters({ "browser" })
 	@BeforeMethod
 	// test data and browser configuration
 	public void buildConfiguration(String browser) {
@@ -57,7 +57,7 @@ public class GuiConfigLoader {
 		this.driver.get(this.baseURL);
 		this.logger.info("-- Browser initialized --");
 	}
-	
+
 	// select which browser is going to start based on the xml test file
 	private void startBrowser() {
 		switch (this.browser.toLowerCase()) {
@@ -65,11 +65,9 @@ public class GuiConfigLoader {
 			this.chromeStart();
 			break;
 		case "firefox":
-			System.setProperty("webdriver.gecko.driver", "./resources/geckodriver/geckodriver.exe");
 			this.driver = new FirefoxDriver();
 			break;
 		case "ie":
-			System.setProperty("webdriver.ie.driver", "./resources/iedriver/IEDriverServer.exe");
 			this.driver = new InternetExplorerDriver();
 			break;
 		default:
@@ -77,17 +75,15 @@ public class GuiConfigLoader {
 			break;
 		}
 	}
-	
+
 	// chrome has specific start sequence to avoid infobars
 	private void chromeStart() {
-		System.setProperty("webdriver.chrome.driver", "./resources/chromedriver/chromedriver.exe");
 		this.options = new ChromeOptions();
 		this.options.addArguments("disable-infobars");
 		this.options.addArguments("start-maximized");
 		this.driver = new ChromeDriver(this.options);
 	}
 
-	
 	// this method closes the browser, if an error occurs: a screenshot is taken
 	@AfterMethod
 	public void closeDriver(ITestResult result) {
@@ -98,7 +94,7 @@ public class GuiConfigLoader {
 			} else if (result.getStatus() == ITestResult.FAILURE) {
 				this.logger.info("****** TEST FAILED ******");
 				screenshot = new Screenshot();
-				
+
 				screenshot.takeScreenShoot(this.driver, result.getName());
 
 			} else if (result.getStatus() == ITestResult.SKIP) {
