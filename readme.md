@@ -10,8 +10,6 @@ Developed with:
   - Selenium
   - Java
   
-Use:
-  - Chrome 60-61 (Current ChromeDriver: 2.33)
 
 # How to run test?
 
